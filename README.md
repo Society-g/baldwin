@@ -143,10 +143,17 @@ Colors are read when baldwin starts, so relaunch it after changing your theme.
 
 ## Development
 
+With [Nix flakes](https://wiki.nixos.org/wiki/Flakes), `nix develop` opens a shell with
+Python, every dependency, `playerctl`, `pw-cat` and pytest, pinned by `flake.lock`:
+
 ```sh
-nix-shell          # or: pip install -e . pytest
+nix develop        # or: nix-shell, or: pip install -e . pytest
 python -m pytest
+python -m baldwin  # run from your checkout
 ```
+
+`nix build` builds the package and `nix run` launches it. To update the pinned nixpkgs, run
+`nix flake update`.
 
 ## License
 
