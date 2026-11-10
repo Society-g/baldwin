@@ -6,5 +6,10 @@ install_baldwin() {
   pipx install --force "$REPO_DIR"
   pipx ensurepath >/dev/null 2>&1 || true
   echo
-  echo "Done. Open a new terminal (or run: export PATH=\"\$HOME/.local/bin:\$PATH\") and run: baldwin"
+  if PATH="$HOME/.local/bin:$PATH" command -v baldwin >/dev/null; then
+    echo "Installed. Open a new terminal (or run: export PATH=\"\$HOME/.local/bin:\$PATH\"), then run: baldwin"
+  else
+    echo "pipx finished but 'baldwin' was not found; check the output above."
+    exit 1
+  fi
 }

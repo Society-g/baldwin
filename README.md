@@ -32,14 +32,21 @@ sudo dnf install playerctl pipewire-utils
 
 ## Install
 
-Clone the repo and run the script for your distro. It installs the system packages and baldwin itself:
+Clone the repo and run the installer. It detects your distro, installs the system packages
+and puts a `baldwin` command on your PATH:
 
 ```sh
 git clone https://github.com/Society-g/baldwin
 cd baldwin
+./install.sh
+```
+
+Prefer to pick the script yourself?
+
+```sh
 ./install/install-ubuntu.sh   # Ubuntu / Debian / Mint
-./install/install-fedora.sh   # Fedora
-./install/install-arch.sh     # Arch / Manjaro
+./install/install-fedora.sh   # Fedora / RHEL
+./install/install-arch.sh     # Arch / Manjaro / EndeavourOS
 ./install/install-nix.sh      # Nix / NixOS
 ```
 
