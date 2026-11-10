@@ -2,18 +2,7 @@
 
 A terminal now-playing visualizer for Linux.
 
-```
-┌────────┐  artist @ spotify
-│ cover  │  ─────────────────
-│  art   │  Title   For Kicks
-│        │  Artist  Metric
-└────────┘  Album   Pagans in Vegas
-▁▃▅▇█▇▅▃▁▂▄▆█▆▄▂▁   (spectrum visualizer)
-01:23 ━━━━━━●──────────── 04:56
- ╭────╮ ╭────╮ ╔══════╗ ╭────╮ ╭────╮
- │ >< │ │ |<<│ ║> PLAY║ │>>| │ │(@) │
- ╰────╯ ╰────╯ ╚══════╝ ╰────╯ ╰────╯
-```
+![baldwin screenshot](docs/screenshot.png)
 
 - Cover art and fastfetch-style track info
 - Audio-reactive spectrum bars (captures whatever your system is playing)

@@ -13,7 +13,7 @@ class Baldwin(App):
     Screen { padding: 1 2; background: ansi_default; }
     * { background: transparent; }
     #header { height: 16; }
-    #cover { width: 24; height: 12; margin-right: 3; }
+    #cover { width: 26; height: 14; border: ascii; margin-right: 3; }
     #side { width: 1fr; height: 16; }
     """
     BINDINGS = [
@@ -56,6 +56,7 @@ class Baldwin(App):
             self.query_one(Visualizer).colors = self.accents
             self.query_one(TimeBar).accent = self.accents[1]
             self.query_one(Banner).accent = self.accents[1]
+            self.query_one("#cover").styles.border = ("ascii", self.accents[1])
             self.query_one(ArtFooter).colors = self.accents
         self.query_one(InfoPanel).show(t, self.accents)
         self.query_one(Controls).sync(t, self.accents[1])
