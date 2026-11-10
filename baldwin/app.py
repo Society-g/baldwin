@@ -27,7 +27,10 @@ class Baldwin(App):
 
     TITLE = "baldwin"
     track = None
-    accents = theme.load()
+
+    def __init__(self):
+        super().__init__()
+        self.accents = theme.load()  # queries the terminal before Textual takes over
 
     def compose(self) -> ComposeResult:
         with Vertical():

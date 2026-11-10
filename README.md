@@ -8,7 +8,7 @@ A terminal now-playing visualizer for Linux.
 - Audio-reactive spectrum bars (captures whatever your system is playing)
 - Clickable time bar and stylized ASCII media buttons
 - Works with any MPRIS player: Spotify, mpv, Firefox, VLC, ...
-- Follows your terminal theme: accent colors are read from your kitty config, and the
+- Follows your terminal theme (kitty, Alacritty, WezTerm, foot, Ghostty and more), and the
   background is transparent so your terminal opacity shows through
 
 ## Requirements
@@ -86,9 +86,36 @@ The time bar and the buttons are clickable too.
 
 ## Theming
 
-Colors come from `color1`, `color9` and `color10` in `~/.config/kitty/kitty.conf`
-(the visualizer gradient and accents). If that file is missing it uses a red default.
-For a see-through window, set `background_opacity` in kitty.
+baldwin picks its accent colors from your terminal theme, in this order:
+
+1. **Your override:** the `BALDWIN_ACCENT` environment variable or
+   `~/.config/baldwin/config.toml` (see below).
+2. **The live terminal palette.** baldwin asks the terminal for its colors (an OSC 4 query),
+   which works in kitty, Alacritty, WezTerm, foot, Ghostty, iTerm2, GNOME Terminal and other
+   VTE terminals, Konsole, xterm and more.
+3. **Terminal config files** if the terminal doesn't answer: kitty (including `include`d theme
+   files), Alacritty (including `import`s), foot, Ghostty and `~/.Xresources`.
+4. A default red.
+
+The accent is a three-step ramp built from one ANSI color, **red** by default: the normal
+color, the bright color, and a lightened bright color. Text and background are your
+terminal's own, so a transparent terminal stays transparent.
+
+Pick another hue or set exact colors, either as an environment variable:
+
+```sh
+BALDWIN_ACCENT=blue baldwin                      # red green yellow blue magenta cyan
+BALDWIN_ACCENT="#ff5555,#ff8888,#ffbbbb" baldwin # 1 to 3 hex colors, dark to light
+```
+
+or in `~/.config/baldwin/config.toml`:
+
+```toml
+accent = "cyan"
+# accent = ["#ff5555", "#ff8888", "#ffbbbb"]
+```
+
+Colors are read when baldwin starts, so relaunch it after changing your theme.
 
 ## Troubleshooting
 
