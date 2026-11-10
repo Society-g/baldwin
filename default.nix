@@ -6,7 +6,7 @@ pkgs.python3Packages.buildPythonApplication {
   src = pkgs.lib.cleanSource ./.;
   build-system = [ pkgs.python3Packages.setuptools ];
   dependencies = with pkgs.python3Packages; [ textual textual-image numpy pillow ];
-  makeWrapperArgs = [ "--prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.playerctl pkgs.pipewire ]}" ];
+  makeWrapperArgs = [ "--prefix" "PATH" ":" (pkgs.lib.makeBinPath [ pkgs.playerctl pkgs.pipewire ]) ];
   doCheck = false;
   meta.mainProgram = "baldwin";
 }
