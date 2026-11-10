@@ -79,6 +79,15 @@ Or run it without installing:
 nix-shell --run 'python -m baldwin'
 ```
 
+## Uninstall
+
+```sh
+./uninstall.sh           # remove baldwin (pipx or Nix, whichever you used)
+./uninstall.sh --purge   # also delete its cache and config
+```
+
+System packages (`playerctl`, PipeWire, `pipx`) are left in place since other programs may use them.
+
 ## Controls
 
 | Key | Action |
