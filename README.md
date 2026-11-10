@@ -64,9 +64,11 @@ pipx install .
 
 ### NixOS / Nix
 
+`./install/install-nix.sh` builds baldwin and puts a `baldwin` command in your Nix profile
+(it ships with `playerctl` and `pw-cat` wired in, so there is nothing else to install).
+Or run it without installing:
+
 ```sh
-git clone https://github.com/Society-g/baldwin
-cd baldwin
 nix-shell --run 'python -m baldwin'
 ```
 

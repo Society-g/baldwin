@@ -92,4 +92,13 @@ class Baldwin(App):
 
 
 def main():
+    import argparse
+    from importlib.metadata import PackageNotFoundError, version
+
+    p = argparse.ArgumentParser(prog="baldwin", description="Terminal now-playing visualizer.")
+    try:
+        p.add_argument("--version", action="version", version=f"baldwin {version('baldwin')}")
+    except PackageNotFoundError:
+        pass
+    p.parse_args()
     Baldwin().run()

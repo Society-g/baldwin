@@ -1,17 +1,14 @@
 #!/usr/bin/env bash
 # Nix / NixOS (no root needed). Run from a clone: ./install/install-nix.sh
-# Copies the project to ~/.local/share/baldwin and puts a `baldwin` launcher in ~/.local/bin.
+# Builds baldwin and installs a `baldwin` command into your Nix profile.
 set -euo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/common.sh"
 
-command -v nix-shell >/dev/null || { echo "nix-shell not found"; exit 1; }
-dest="$HOME/.local/share/baldwin"
-mkdir -p "$dest" "$HOME/.local/bin"
-cp -r "$REPO_DIR"/baldwin "$REPO_DIR"/shell.nix "$dest"/
-cat > "$HOME/.local/bin/baldwin" <<LAUNCH
-#!/bin/sh
-cd "$dest" && exec nix-shell --run "python -m baldwin"
-LAUNCH
-chmod +x "$HOME/.local/bin/baldwin"
-echo "Installed. Make sure ~/.local/bin is on your PATH, then run: baldwin"
-echo "(first launch downloads dependencies and may take a minute)"
+command -v nix >/dev/null || { echo "nix not found"; exit 1; }
+FEATURES=(--extra-experimental-features "nix-command flakes")
+nix "${FEATURES[@]}" profile remove baldwin >/dev/null 2>&1 || true
+if ! nix "${FEATURES[@]}" profile add --file "$REPO_DIR/default.nix" 2>/dev/null &&
+   ! nix "${FEATURES[@]}" profile install --file "$REPO_DIR/default.nix" 2>/dev/null; then
+  nix-env -if "$REPO_DIR/default.nix"   # older nix-env style profiles
+fi
+echo "Installed. Run: baldwin"
