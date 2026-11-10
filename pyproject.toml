@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "baldwin"
+version = "0.1.0"
+description = "A terminal now-playing visualizer: cover art, fastfetch-style info, spectrum bars and media controls"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = ["textual>=0.80", "textual-image", "numpy", "pillow"]
+
+[project.scripts]
+baldwin = "baldwin.app:main"
+
+[tool.setuptools]
+packages = ["baldwin"]
